@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"encoding/csv"
 	"fmt"
 	"os"
@@ -111,8 +112,6 @@ func main() {
         outputFileName = os.Args[3]
     }
 
-    timeStart := time.Now()
-    fmt.Printf("Starting task @ %v\n", timeStart)
     // Open the required files
     productExportFile, err := os.Open(productExportFileName)
     if err != nil {
@@ -146,17 +145,27 @@ func main() {
         panic(err.Error())
     }
 
-    // illegalTags could be pulled from a WebUI
-    var illegalTagsString string
+    scanner := bufio.NewScanner(os.Stdin)
+
     fmt.Println("What tags should be archived?")
-    fmt.Scanf("%s", illegalTagsString)
+    scanner.Scan()
+    illegalTagsString := scanner.Text()
     illegalTags := strings.Fields(illegalTagsString)
 
-    var maxStock int
-    fmt.Println("What should be the max stock for these products?")
-    fmt.Scanf("%d", maxStock)
+    fmt.Println("Give minumum stock to not be archived")
+    scanner.Scan()
+    minStockString := scanner.Text()
+    minStock, err := strconv.Atoi(minStockString)
+    if err != nil {
+        fmt.Printf("Given minimum stock isn't an integer.\n")
+        panic(err.Error())
+    }
+    fmt.Printf("Minimum stock: %d\n", minStock)
 
-    archivedProducts := archiveWithTags(products, illegalTags, maxStock)
+    timeStart := time.Now()
+    fmt.Printf("Starting task @ %v\n", timeStart)
+
+    archivedProducts := archiveWithTags(products, illegalTags, minStock)
 
     if err != nil {
         panic(err.Error())
@@ -189,10 +198,10 @@ func writeCSV(data [][]string, csvHeader []string, filename string) error {
     return nil
 }
 
-func archiveWithTags(products []Product, tags []string, maxStock int) (arcivedProducts []Product) {
+func archiveWithTags(products []Product, tags []string, minStock int) (arcivedProducts []Product) {
     for _, product := range products {
         for _, tag := range tags {
-            if product.hasTag(tag) && product.Inventory < maxStock{
+            if product.hasTag(tag) && product.Inventory < minStock{
                 product.Status = "archived"
                 arcivedProducts = append(arcivedProducts, product)
             }
