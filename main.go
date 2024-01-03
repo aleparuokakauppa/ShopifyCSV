@@ -112,8 +112,6 @@ func main() {
         outputFileName = os.Args[3]
     }
 
-    timeStart := time.Now()
-    fmt.Printf("Starting task @ %v\n", timeStart)
     // Open the required files
     productExportFile, err := os.Open(productExportFileName)
     if err != nil {
@@ -154,16 +152,20 @@ func main() {
     illegalTagsString := scanner.Text()
     illegalTags := strings.Fields(illegalTagsString)
 
-    fmt.Println("What should be the max stock for these products?")
+    fmt.Println("Give minumum stock to not be archived")
     scanner.Scan()
-    maxStockString := scanner.Text()
-    maxStock, err := strconv.Atoi(maxStockString)
+    minStockString := scanner.Text()
+    minStock, err := strconv.Atoi(minStockString)
     if err != nil {
-        fmt.Printf("Given max stock isn't an integer.\n")
+        fmt.Printf("Given minimum stock isn't an integer.\n")
         panic(err.Error())
     }
+    fmt.Printf("Minimum stock: %d\n", minStock)
 
-    archivedProducts := archiveWithTags(products, illegalTags, maxStock)
+    timeStart := time.Now()
+    fmt.Printf("Starting task @ %v\n", timeStart)
+
+    archivedProducts := archiveWithTags(products, illegalTags, minStock)
 
     if err != nil {
         panic(err.Error())
@@ -196,10 +198,10 @@ func writeCSV(data [][]string, csvHeader []string, filename string) error {
     return nil
 }
 
-func archiveWithTags(products []Product, tags []string, maxStock int) (arcivedProducts []Product) {
+func archiveWithTags(products []Product, tags []string, minStock int) (arcivedProducts []Product) {
     for _, product := range products {
         for _, tag := range tags {
-            if product.hasTag(tag) && product.Inventory < maxStock{
+            if product.hasTag(tag) && product.Inventory < minStock{
                 product.Status = "archived"
                 arcivedProducts = append(arcivedProducts, product)
             }
