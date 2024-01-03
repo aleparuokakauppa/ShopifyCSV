@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"encoding/csv"
 	"fmt"
 	"os"
@@ -146,15 +147,21 @@ func main() {
         panic(err.Error())
     }
 
-    // illegalTags could be pulled from a WebUI
-    var illegalTagsString string
+    scanner := bufio.NewScanner(os.Stdin)
+
     fmt.Println("What tags should be archived?")
-    fmt.Scanf("%s", illegalTagsString)
+    scanner.Scan()
+    illegalTagsString := scanner.Text()
     illegalTags := strings.Fields(illegalTagsString)
 
-    var maxStock int
     fmt.Println("What should be the max stock for these products?")
-    fmt.Scanf("%d", maxStock)
+    scanner.Scan()
+    maxStockString := scanner.Text()
+    maxStock, err := strconv.Atoi(maxStockString)
+    if err != nil {
+        fmt.Printf("Given max stock isn't an integer.\n")
+        panic(err.Error())
+    }
 
     archivedProducts := archiveWithTags(products, illegalTags, maxStock)
 
