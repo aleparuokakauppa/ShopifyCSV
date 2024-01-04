@@ -26,9 +26,6 @@ Handle // Index 0
 Title // Index 1
 SKU // Index 8
 Sales channels begin at 11:
-Leluaitta_Varastomyymälä // Index 11
-Tinks_Juhlakauppa // Index 12
-Wolt // Index 13
 */
 
 type Product struct {
