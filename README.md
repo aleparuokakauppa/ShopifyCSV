@@ -3,7 +3,9 @@ Tool that makes archiving large amounts of products easier, according to require
 
 # What/How
 This program utilizes the product/inventory import/export scheme.
+
 At the moment the program is a cli, which takes a product export csv and an inventory export csv as its input and creates a new product import csv according to inputs given in the program.
+
 This program was created as a quick way to solve a specific problem and isn't expected to develop into anything bigger yet.
 
 # Use
