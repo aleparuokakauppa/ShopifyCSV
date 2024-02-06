@@ -15,6 +15,6 @@ This program was created as a quick way to solve a specific problem and isn't ex
 `./main [productExport.csv] [inventoryExport.csv] [outputFile.csv]`
 
 # Roadmap
-- A webUI to be able to be used by employees, who don't have to know the codebase.
+- A GUI to be able to be used by employees, who don't have to know the codebase.
 - More advanced requirements for archival
 - Feature to adjust inventories
