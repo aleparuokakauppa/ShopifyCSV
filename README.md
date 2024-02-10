@@ -28,6 +28,6 @@ Replace the fields in the brackets with the appropriate filepaths.
 The source code is somewhat easily modifiable within the `archiveWithTags`-function to act according to customized behaviour.
 
 # Roadmap
-- A GUI to be able to be used by employees, who don't have to know the codebase.
+- A GUI to be able to be used by employees, who don't want a CLI.
 - More advanced requirements for archival
 - Feature to adjust inventories
