@@ -18,6 +18,10 @@ go build
 ```bash
 ./main [productExport.csv] [inventoryExport.csv] [outputFile.csv]
 ```
+OR
+```bash
+go run main.go
+```
 Replace the fields in the brackets with the appropriate filepaths.
 
 ### Note
