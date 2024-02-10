@@ -1,5 +1,5 @@
-# ShopifyProductArchiver CLI
-Tool that makes archiving large amounts of products easier, according to requirements given by the user.
+# ShopifyProductArchiver
+A CLI tool that makes archiving large amounts of products easier, according to requirements given by the user.
 
 # What/How
 This program utilizes the product/inventory import/export scheme.
