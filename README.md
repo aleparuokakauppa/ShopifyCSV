@@ -30,4 +30,3 @@ The source code is somewhat easily modifiable within the `archiveWithTags`-funct
 # Roadmap
 - A GUI to be able to be used by employees, who don't want a CLI.
 - More advanced requirements for archival
-- Feature to adjust inventories
