@@ -20,7 +20,7 @@ go build
 ```
 OR
 ```bash
-go run main.go
+go run main.go [productExport.csv] [inventoryExport.csv] [outputFile.csv]
 ```
 Replace the fields in the brackets with the appropriate filepaths.
 
